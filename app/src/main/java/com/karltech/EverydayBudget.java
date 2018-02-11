@@ -1,0 +1,15 @@
+package com.karltech;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.karltech.android.everydaybudget.R;
+
+public class EverydayBudget extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_everyday_budget);
+    }
+}
