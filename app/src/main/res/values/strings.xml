@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Everyday Budget</string>
+    <string name="amount">$Amount</string>
+
+</resources>
