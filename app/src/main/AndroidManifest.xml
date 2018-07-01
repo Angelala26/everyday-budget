@@ -18,6 +18,16 @@
         </activity>
         <activity android:name=".EverydayBudget">
         </activity>
+        <activity
+            android:name=".Transactions"
+            android:label="@string/title_activity_transactions"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Savings"
+            android:label="@string/title_activity_savings"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
