@@ -44,7 +44,7 @@ public class AmountPerDay {
         this.savings = savings;
     }
 
-    public int calculateAmountPerDay(int income, int expenses, int savings, int amountPerDay){
+    public int calculateAmountPerDay(int income, int expenses, int savings){
         amountPerDay = income - expenses - savings;
         return amountPerDay;
     }
