@@ -7,10 +7,9 @@ import android.widget.TextView;
 public class EverydayBudget extends AppCompatActivity {
 
     TextView amountPerDayTextView;
-    Amounts amountPerDay;
-    Amounts savingsPerDay;
-    Amounts incomePerDay;
-    Amounts expensesPerDay;
+    private int income;
+    private int expenses;
+    private int savings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,20 +20,16 @@ public class EverydayBudget extends AppCompatActivity {
         amountPerDayTextView = findViewById(R.id.amount_per_day_text_view);
 
         //get the amount per day and set it in the text view
-        amountPerDayTextView.setText(getAmountPerDay(amountPerDay));
+        amountPerDayTextView.setText(calculateAmountPerDay(income, expenses, savings));
 
     }
 
-    //get the amount per day of everything
-    private int getAmountPerDay() {
-        int income = incomePerDay.getIncome();
-        int expenses = expensesPerDay.getExpenses();
-        int savings = savingsPerDay.getSavings();
-
-        //call calculateAmountPerDay
-        int amountPerDay = amountPerDay.calculateAmountPerDay(income, expenses, savings);
-        //TODO: call calculateAmountPerDay before getAmountPerDay
-        //TODO: call get savings, income, etc before I calculate the amount per day
-        return amountPerDay.getAmountPerDay();
+    //Calculate the amount per day
+    public int calculateAmountPerDay(int income, int expenses, int savings){
+        this.income = income;
+        this.expenses = expenses;
+        this.savings = savings;
+        return income - expenses - savings;
     }
+
 }
