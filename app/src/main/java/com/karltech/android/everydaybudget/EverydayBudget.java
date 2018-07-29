@@ -19,6 +19,8 @@ public class EverydayBudget extends AppCompatActivity {
         //connect amountPerDayTextView with TextView
         amountPerDayTextView = findViewById(R.id.amount_per_day_text_view);
 
+        //TODO: have users write in their amounts, connect them with income, expenses, and savings
+        //TODO: and then calculate the amounts
         //get the amount per day and set it in the text view
         amountPerDayTextView.setText(calculateAmountPerDay(income, expenses, savings));
 

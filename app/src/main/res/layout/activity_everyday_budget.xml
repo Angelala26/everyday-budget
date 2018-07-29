@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="Amount per day: "
+        android:text="@string/amount_per_day"
         android:gravity="center_vertical"
         android:layout_gravity="center_horizontal"
         android:layout_weight="3"/>
@@ -23,21 +23,36 @@
         android:id="@+id/regular_income_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Regular income: "
+        android:text="@string/regular_income"
         android:layout_weight="1"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
 
     <TextView
         android:id="@+id/recurring_expenses_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recurring expenses: "
+        android:text="@string/recurring_expenses"
         android:layout_weight="1"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
 
     <TextView
         android:id="@+id/savings_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Savings: "
+        android:text="@string/savings"
         android:layout_weight="1"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
 
 </LinearLayout>
