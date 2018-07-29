@@ -27,6 +27,7 @@
         android:layout_weight="1"/>
 
     <EditText
+        android:id="@+id/income_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"/>
@@ -39,6 +40,7 @@
         android:layout_weight="1"/>
 
     <EditText
+        android:id="@+id/expenses_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"/>
@@ -51,6 +53,7 @@
         android:layout_weight="1"/>
 
     <EditText
+        android:id="@+id/savings_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"/>
