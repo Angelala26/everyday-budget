@@ -22,20 +22,25 @@ public class EverydayBudget extends AppCompatActivity {
         EditText expensesEditText = findViewById(R.id.expenses_edit_text);
         EditText savingsEditText = findViewById(R.id.savings_edit_text);
 
-        //get user inputs and convert them to string
-        String incomeString = incomeEditText.getText().toString();
-        String expenseString = expensesEditText.getText().toString();
-        String savingsString = savingsEditText.getText().toString();
-
-        //convert String to int
-        int incomeInt = Integer.parseInt(incomeString);
-        int expensesInt = Integer.parseInt(expenseString);
-        int savingsInt = Integer.parseInt(savingsString);
+//        //get user inputs and convert them to string
+//        String incomeString = incomeEditText.getText().toString();
+//        String expenseString = expensesEditText.getText().toString();
+//        String savingsString = savingsEditText.getText().toString();
+//
+//        //input a number so it isn't empty when trying to parse
+//        incomeString = "0";
+//        expenseString = "0";
+//        savingsString = "0";
+//
+//        //convert String to int
+//        int incomeInt = Integer.parseInt(incomeString);
+//        int expensesInt = Integer.parseInt(expenseString);
+//        int savingsInt = Integer.parseInt(savingsString);
 
         //TODO: have users write in their amounts, connect them with income, expenses, and savings
         //TODO: and then calculate the amounts
         //get the amount per day and set it in the text view
-        amountPerDayTextView.setText(calculateAmountPerDay(incomeInt, expensesInt, savingsInt));
+//        amountPerDayTextView.setText(calculateAmountPerDay(incomeInt, expensesInt, savingsInt));
 
     }
 
