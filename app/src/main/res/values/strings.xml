@@ -11,5 +11,6 @@
     <string name="title_activity_savings">Savings</string>
     <string name="large_purchases">Large Purchases </string>
     <string name="home">Home </string>
+    <string name="big_expenses">Big Expenses </string>
 
 </resources>
