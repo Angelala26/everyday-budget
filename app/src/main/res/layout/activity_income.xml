@@ -6,44 +6,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.karltech.android.everydaybudget.Expenses"
-    tools:showIn="@layout/activity_expenses"
+    tools:context="com.karltech.android.everydaybudget.Income"
+    tools:showIn="@layout/activity_income"
     >
 
     <TextView
-        android:id="@+id/recurring_expenses_text_view"
+        android:id="@+id/monthly_income_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="35sp"
-        android:text="@string/recurring_expenses"
+        android:text="@string/monthly_income"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:padding="20dp"/>
 
     <EditText
-        android:id="@+id/enter_expenses_edit_text"
+        android:id="@+id/enter_income_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recurring_expenses_text_view"
+        android:layout_below="@+id/monthly_income_text_view"
         android:gravity="center_vertical|start"
         android:inputType="number"
-        android:hint="@string/rent"
+        android:hint="@string/work"
         android:padding="30dp"/>
 
     <EditText
         android:id="@+id/enter_expense_names_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recurring_expenses_text_view"
+        android:layout_below="@+id/monthly_income_text_view"
         android:gravity="center_vertical|end"
-        android:hint="1500"
+        android:hint="2000"
         android:padding="30dp"/>
 
     <Button
-        android:id="@+id/add_another_expense_button"
+        android:id="@+id/add_more_income_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/add_expenses"/>
+        android:text="@string/add_income"/>
 
 </RelativeLayout>
