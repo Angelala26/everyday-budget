@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
+    protected DrawerLayout mDrawerLayout;
     TextView amountTextView;
     TextView todayTextView;
     TextView tomorrowTextView;
@@ -35,15 +35,6 @@ public class MainActivity extends AppCompatActivity {
         // Connect Buttons
         addButton = findViewById(R.id.add_button);
         subtractButton = findViewById(R.id.subtract_button);
-
-        /*
-        //add toolbar
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        */
 
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);

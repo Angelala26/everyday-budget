@@ -1,15 +1,14 @@
 package com.karltech.android.everydaybudget;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class Income extends AppCompatActivity {
+public class Income extends MainActivity {
 
     EditText enterIncomeEditText;
     EditText enterIncomeNamesEditText;
@@ -20,7 +19,14 @@ public class Income extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_income);
+
+        //this takes everything from MainActivity, so create a implement thing that is empty apart
+        //from the navigation thing and make every
+        //activity implement it instead
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_income, null, false);
+        mDrawerLayout.addView(contentView, 0);
 
         //connect EditTexts
         enterIncomeEditText = findViewById(R.id.enter_income_edit_text);
@@ -30,7 +36,8 @@ public class Income extends AppCompatActivity {
         //create new TextView for later
         final TextView incomeDisplay = new TextView(this);
 
-
+/*
+//getting null pointer exception with this because there is no string or double still?
         addIncomeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //convert to string or double
@@ -45,6 +52,6 @@ public class Income extends AppCompatActivity {
                 incomeDisplay.setText(incomeDouble + "   " + incomeName);
             }
         });
-
+*/
     }
 }
