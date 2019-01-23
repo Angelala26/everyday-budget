@@ -41,8 +41,8 @@ public class Income extends AppCompatActivity {
                 //TODO: Transfer this info to line in scroll view showing incomes
                 //create TextView after clicking
                 incomeDisplay.setLayoutParams(new RelativeLayout.LayoutParams
-                        (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                incomeDisplay.setText(income + "   " + incomeName);
+                        (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                incomeDisplay.setText(incomeDouble + "   " + incomeName);
             }
         });
 

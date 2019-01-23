@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,12 +36,14 @@ public class MainActivity extends AppCompatActivity {
         addButton = findViewById(R.id.add_button);
         subtractButton = findViewById(R.id.subtract_button);
 
+        /*
         //add toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        */
 
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -62,24 +63,29 @@ public class MainActivity extends AppCompatActivity {
                         int id = menuItem.getItemId();
                         switch (id) {
                             case R.id.nav_expenses:
-                                Intent i = new Intent(MainActivity.this, EverydayBudget.class);
-                                startActivity(i);
+                                Intent expenseIntent = new Intent
+                                        (MainActivity.this, Expenses.class);
+                                startActivity(expenseIntent);
                                 break;
                             case R.id.nav_income:
-                                //Do some thing here
-                                // add navigation drawer item onclick method here
+                                Intent incomeIntent = new Intent
+                                        (MainActivity.this, Income.class);
+                                startActivity(incomeIntent);
                                 break;
                             case R.id.nav_home:
-                                //Do some thing here
-                                // add navigation drawer item onclick method here
+                                Intent homeIntent = new Intent
+                                        (MainActivity.this, MainActivity.class);
+                                startActivity(homeIntent);
                                 break;
                             case R.id.nav_large_purchases:
-                                //Do some thing here
-                                // add navigation drawer item onclick method here
+                                Intent budgetIntent = new Intent
+                                        (MainActivity.this, EverydayBudget.class);
+                                startActivity(budgetIntent);
                                 break;
                             case R.id.nav_transactions:
-                                //Do some thing here
-                                // add navigation drawer item onclick method here
+                                Intent transactionsIntent = new Intent
+                                        (MainActivity.this, Transactions.class);
+                                startActivity(transactionsIntent);
                                 break;
                         }
                         //not sure if i should return false or true here
