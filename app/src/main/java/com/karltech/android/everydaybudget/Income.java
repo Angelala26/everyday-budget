@@ -29,7 +29,6 @@ public class Income extends MainActivity {
         //create new TextView for later
         final TextView incomeDisplay = new TextView(this);
 
-        //try to add navigation drawer
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
