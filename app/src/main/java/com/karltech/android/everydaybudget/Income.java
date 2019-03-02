@@ -1,9 +1,6 @@
 package com.karltech.android.everydaybudget;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,20 +10,13 @@ public class Income extends MainActivity {
     EditText enterIncomeEditText;
     EditText enterIncomeNamesEditText;
     Button addIncomeButton;
-
     //TODO: show income on line after entered and leave space to enter more incomes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_income);
 
-        //this takes everything from MainActivity, so create a implement thing that is empty apart
-        //from the navigation thing and make every
-        //activity implement it instead
-        LayoutInflater inflater = (LayoutInflater) this
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.activity_income, null, false);
-        mDrawerLayout.addView(contentView, 0);
 
         //connect EditTexts
         enterIncomeEditText = findViewById(R.id.enter_income_edit_text);
@@ -53,5 +43,7 @@ public class Income extends MainActivity {
             }
         });
 */
+
+
     }
 }
