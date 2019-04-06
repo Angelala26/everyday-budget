@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +18,9 @@ public class Income extends MainActivity {
     EditText enterIncomeEditText;
     EditText enterIncomeNamesEditText;
     Button addIncomeButton;
+    private LinearLayout mLayout;
+
+
     //TODO: show income on line after entered and leave space to enter more incomes
 
     @Override
@@ -26,14 +29,12 @@ public class Income extends MainActivity {
         setContentView(R.layout.activity_income);
 
 
-        //connect EditTexts
+        //connect EditTexts, button, and layout
         enterIncomeEditText = findViewById(R.id.enter_income_edit_text);
         enterIncomeNamesEditText = findViewById(R.id.enter_income_names_edit_text);
         addIncomeButton = findViewById(R.id.add_income_button);
+        mLayout = findViewById(R.id.linearLayout);
 
-
-        //create new TextView for later
-        final TextView incomeDisplay = new TextView(this);
 
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -82,30 +83,34 @@ public class Income extends MainActivity {
                 });
 
 
-        //getting null pointer exception with this because there is no string or double still?
                 addIncomeButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         //TODO: Transfer this info to line in scroll view showing incomes
-                        //create TextView after clicking
-                        incomeDisplay.setLayoutParams(new RelativeLayout.LayoutParams
-                                (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        //convert to string or double
                         if (TextUtils.isEmpty(enterIncomeEditText.getText())) {
                             Toast.makeText(Income.this, "Income Empty", Toast.LENGTH_SHORT).show();
                         } else {
                             String income = enterIncomeEditText.getText().toString();
-                            Double incomeDouble = Double.valueOf(income);
-                            incomeDisplay.setText(Double.toString(incomeDouble));
+                            //Double incomeDouble = Double.valueOf(income);
+                            mLayout.addView( createNewTextView(income));
                         }
                         if (TextUtils.isEmpty(enterIncomeNamesEditText.getText())) {
                             Toast.makeText(Income.this, "Name Empty", Toast.LENGTH_SHORT).show();
                         } else {
                             String incomeName = enterIncomeNamesEditText.getText().toString();
-                            incomeDisplay.setText(incomeName);
+                            mLayout.addView(createNewTextView(incomeName));
                         }
                     }
                 });
 
 
+    }
+
+    private TextView createNewTextView(String incomeName) {
+        final ViewGroup.LayoutParams lparams = new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final TextView textView = new TextView(this);
+        textView.setLayoutParams(lparams);
+        textView.setText(incomeName);
+        return textView;
     }
 }
