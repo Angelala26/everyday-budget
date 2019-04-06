@@ -3,10 +3,15 @@ package com.karltech.android.everydaybudget;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Income extends MainActivity {
 
@@ -23,8 +28,9 @@ public class Income extends MainActivity {
 
         //connect EditTexts
         enterIncomeEditText = findViewById(R.id.enter_income_edit_text);
-        enterIncomeNamesEditText = findViewById(R.id.enter_expense_names_edit_text);
+        enterIncomeNamesEditText = findViewById(R.id.enter_income_names_edit_text);
         addIncomeButton = findViewById(R.id.add_income_button);
+
 
         //create new TextView for later
         final TextView incomeDisplay = new TextView(this);
@@ -75,23 +81,30 @@ public class Income extends MainActivity {
                     }
                 });
 
-/*
-//getting null pointer exception with this because there is no string or double still?
-        addIncomeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //convert to string or double
-                String income = enterIncomeEditText.getText().toString();
-                String incomeName = enterIncomeNamesEditText.getText().toString();
-                Double incomeDouble = Double.valueOf(income);
 
-                //TODO: Transfer this info to line in scroll view showing incomes
-                //create TextView after clicking
-                incomeDisplay.setLayoutParams(new RelativeLayout.LayoutParams
-                        (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                incomeDisplay.setText(incomeDouble + "   " + incomeName);
-            }
-        });
-*/
+        //getting null pointer exception with this because there is no string or double still?
+                addIncomeButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        //TODO: Transfer this info to line in scroll view showing incomes
+                        //create TextView after clicking
+                        incomeDisplay.setLayoutParams(new RelativeLayout.LayoutParams
+                                (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        //convert to string or double
+                        if (TextUtils.isEmpty(enterIncomeEditText.getText())) {
+                            Toast.makeText(Income.this, "Income Empty", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String income = enterIncomeEditText.getText().toString();
+                            Double incomeDouble = Double.valueOf(income);
+                            incomeDisplay.setText(Double.toString(incomeDouble));
+                        }
+                        if (TextUtils.isEmpty(enterIncomeNamesEditText.getText())) {
+                            Toast.makeText(Income.this, "Name Empty", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String incomeName = enterIncomeNamesEditText.getText().toString();
+                            incomeDisplay.setText(incomeName);
+                        }
+                    }
+                });
 
 
     }

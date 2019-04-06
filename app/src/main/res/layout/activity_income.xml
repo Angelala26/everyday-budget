@@ -24,23 +24,24 @@
         android:padding="20dp"/>
 
     <EditText
-        android:id="@+id/enter_income_edit_text"
-        android:layout_width="fill_parent"
+        android:id="@+id/enter_income_names_edit_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/monthly_income_text_view"
-        android:gravity="center_vertical|start"
-        android:inputType="number"
+        android:layout_alignParentLeft="true"
+        android:inputType="text"
         android:hint="@string/work"
-        android:padding="30dp"/>
+        android:padding="80dp"/>
 
     <EditText
-        android:id="@+id/enter_income_names_edit_text"
-        android:layout_width="fill_parent"
+        android:id="@+id/enter_income_edit_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/monthly_income_text_view"
-        android:gravity="center_vertical|end"
+        android:layout_alignParentEnd="true"
         android:hint="2000"
-        android:padding="30dp"/>
+        android:inputType="number"
+        android:padding="80dp"/>
 
     <Button
         android:id="@+id/add_income_button"
