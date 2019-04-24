@@ -86,16 +86,12 @@ public class Income extends MainActivity {
                 addIncomeButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         //TODO: Transfer this info to line in scroll view showing incomes
-                        if (TextUtils.isEmpty(enterIncomeEditText.getText())) {
-                            Toast.makeText(Income.this, "Income Empty", Toast.LENGTH_SHORT).show();
+                        if (TextUtils.isEmpty(enterIncomeEditText.getText()) |
+                                TextUtils.isEmpty(enterIncomeNamesEditText.getText())) {
+                            Toast.makeText(Income.this, "Entry Empty", Toast.LENGTH_SHORT).show();
                         } else {
                             String income = enterIncomeEditText.getText().toString();
-                            //Double incomeDouble = Double.valueOf(income);
                             mLayout.addView( createNewTextView(income));
-                        }
-                        if (TextUtils.isEmpty(enterIncomeNamesEditText.getText())) {
-                            Toast.makeText(Income.this, "Name Empty", Toast.LENGTH_SHORT).show();
-                        } else {
                             String incomeName = enterIncomeNamesEditText.getText().toString();
                             mLayout.addView(createNewTextView(incomeName));
                         }
