@@ -21,21 +21,21 @@
         android:padding="20dp"/>
 
     <EditText
-        android:id="@+id/enter_expenses_edit_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recurring_expenses_text_view"
-        android:layout_alignParentLeft="true"
-        android:inputType="number"
-        android:hint="@string/rent"
-        android:padding="80dp"/>
-
-    <EditText
         android:id="@+id/enter_expense_names_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recurring_expenses_text_view"
+        android:layout_alignParentStart="true"
+        android:hint="@string/rent"
+        android:padding="80dp"/>
+
+    <EditText
+        android:id="@+id/enter_expenses_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recurring_expenses_text_view"
         android:layout_alignParentEnd="true"
+        android:inputType="number"
         android:hint="1500"
         android:padding="80dp"/>
 

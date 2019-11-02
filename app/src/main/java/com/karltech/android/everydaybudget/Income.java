@@ -82,7 +82,6 @@ public class Income extends MainActivity {
                 });
 
 
-        //getting null pointer exception with this because there is no string or double still?
                 addIncomeButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         //TODO: Transfer this info to line in scroll view showing incomes
