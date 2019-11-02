@@ -22,22 +22,22 @@
 
     <EditText
         android:id="@+id/enter_expenses_edit_text"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recurring_expenses_text_view"
-        android:gravity="center_vertical|start"
+        android:layout_alignParentLeft="true"
         android:inputType="number"
         android:hint="@string/rent"
-        android:padding="30dp"/>
+        android:padding="80dp"/>
 
     <EditText
         android:id="@+id/enter_expense_names_edit_text"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recurring_expenses_text_view"
-        android:gravity="center_vertical|end"
+        android:layout_alignParentEnd="true"
         android:hint="1500"
-        android:padding="30dp"/>
+        android:padding="80dp"/>
 
     <Button
         android:id="@+id/add_expense_button"
