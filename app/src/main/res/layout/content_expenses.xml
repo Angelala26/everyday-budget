@@ -24,24 +24,25 @@
         android:id="@+id/enter_expense_names_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recurring_expenses_text_view"
+        android:layout_below="@+id/expense_name_text_view"
         android:layout_alignParentStart="true"
-        android:hint="@string/rent"
+        android:hint="@string/expense"
         android:padding="80dp"/>
 
     <EditText
         android:id="@+id/enter_expenses_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recurring_expenses_text_view"
+        android:layout_below="@+id/expense_amount_text_view"
         android:layout_alignParentEnd="true"
         android:inputType="number"
-        android:hint="1500"
+        android:hint="@string/amount_hint"
         android:padding="80dp"/>
 
     <Button
         android:id="@+id/add_expense_button"
         android:layout_width="wrap_content"
+        android:layout_below="@id/enter_expense_names_edit_text"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/add_expenses"/>
@@ -50,16 +51,18 @@
         android:id="@+id/expense_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/add_expense_button"
+        android:layout_below="@id/recurring_expenses_text_view"
         android:layout_alignParentStart="true"
-        android:padding="80dp" />
+        android:padding="30dp"
+        android:layout_marginLeft="75dp"/>
 
     <TextView
         android:id="@+id/expense_amount_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/add_expense_button"
+        android:layout_below="@id/recurring_expenses_text_view"
         android:layout_alignParentEnd="true"
-        android:padding="80dp" />
+        android:padding="30dp"
+        android:layout_marginRight="75dp"/>
 
 </RelativeLayout>

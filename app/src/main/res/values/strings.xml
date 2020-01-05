@@ -13,7 +13,8 @@
     <string name="home">Home </string>
     <string name="big_expenses">Big Expenses </string>
     <string name="add_expenses">Add recurring expenses.</string>
-    <string name="rent">Rent</string>
+    <string name="expense">Expense</string>
+    <string name="amount_hint">Amount</string>
     <string name="monthly_income">Monthly Income</string>
     <string name="work">Work</string>
     <string name="add_income">Add monthly income</string>

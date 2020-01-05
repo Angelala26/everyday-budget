@@ -36,9 +36,6 @@ public class Expenses extends MainActivity {
         expenseNameTextView = findViewById(R.id.expense_name_text_view);
 
 
-        //create new TextView for later----edit out to try other text view idea
-      //  final TextView expensesDisplay = new TextView(this);
-
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -93,12 +90,13 @@ public class Expenses extends MainActivity {
                 if (TextUtils.isEmpty(enterExpensesEditText.getText()) || TextUtils.isEmpty(enterExpensesNamesEditText.getText())) {
                     Toast.makeText(Expenses.this, "Expense Amount or Name Empty", Toast.LENGTH_SHORT).show();
                 } else {
-                    String income = enterExpensesEditText.getText().toString();
-                    String incomeName = enterExpensesNamesEditText.getText().toString();
-                    Double incomeDouble = Double.valueOf(income);
-                    expenseAmountTextView.setText(Double.toString(incomeDouble));
-                    expenseNameTextView.setText(incomeName);
+                    String income = enterExpensesEditText.getText().toString() + "\n";
+                    String incomeName = enterExpensesNamesEditText.getText().toString() + "\n";
+                    expenseAmountTextView.append(income);
+                    expenseNameTextView.append(incomeName);
                 }
+                enterExpensesNamesEditText.setText("");
+                enterExpensesEditText.setText("");
 
             }
         });
