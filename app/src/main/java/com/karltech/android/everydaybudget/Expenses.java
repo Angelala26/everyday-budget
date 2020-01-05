@@ -20,12 +20,15 @@ public class Expenses extends MainActivity {
     Button addExpenseButton;
     TextView expenseAmountTextView;
     TextView expenseNameTextView;
+    Double totalIncome;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
+
+        totalIncome = 0.00;
 
 
         //connect editTexts
@@ -94,6 +97,9 @@ public class Expenses extends MainActivity {
                     String incomeName = enterExpensesNamesEditText.getText().toString() + "\n";
                     expenseAmountTextView.append(income);
                     expenseNameTextView.append(incomeName);
+                    //parse income to double in order to add it and later feed to EverydayBudget
+                    totalIncome += Double.parseDouble(income);
+                    Toast.makeText(Expenses.this, totalIncome.toString(), Toast.LENGTH_LONG).show();
                 }
                 enterExpensesNamesEditText.setText("");
                 enterExpensesEditText.setText("");
