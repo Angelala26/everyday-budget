@@ -18,6 +18,8 @@ public class Expenses extends MainActivity {
     EditText enterExpensesEditText;
     EditText enterExpensesNamesEditText;
     Button addExpenseButton;
+    TextView expenseAmountTextView;
+    TextView expenseNameTextView;
 
 
     @Override
@@ -30,10 +32,12 @@ public class Expenses extends MainActivity {
         enterExpensesEditText = findViewById(R.id.enter_expenses_edit_text);
         enterExpensesNamesEditText = findViewById(R.id.enter_expense_names_edit_text);
         addExpenseButton = findViewById(R.id.add_expense_button);
-        
+        expenseAmountTextView = findViewById(R.id.expense_amount_text_view);
+        expenseNameTextView = findViewById(R.id.expense_name_text_view);
 
-        //create new TextView for later
-        final TextView expensesDisplay = new TextView(this);
+
+        //create new TextView for later----edit out to try other text view idea
+      //  final TextView expensesDisplay = new TextView(this);
 
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -86,23 +90,16 @@ public class Expenses extends MainActivity {
         addExpenseButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO: Transfer this info to line in scroll view showing incomes
-                //create TextView after clicking
-                expensesDisplay.setLayoutParams(new RelativeLayout.LayoutParams
-                        (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                //convert to string or double
-                if (TextUtils.isEmpty(enterExpensesEditText.getText())) {
-                    Toast.makeText(Expenses.this, "Expense Empty", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(enterExpensesEditText.getText()) || TextUtils.isEmpty(enterExpensesNamesEditText.getText())) {
+                    Toast.makeText(Expenses.this, "Expense Amount or Name Empty", Toast.LENGTH_SHORT).show();
                 } else {
                     String income = enterExpensesEditText.getText().toString();
-                    Double incomeDouble = Double.valueOf(income);
-                    expensesDisplay.setText(Double.toString(incomeDouble));
-                }
-                if (TextUtils.isEmpty(enterExpensesNamesEditText.getText())) {
-                    Toast.makeText(Expenses.this, "Name Empty", Toast.LENGTH_SHORT).show();
-                } else {
                     String incomeName = enterExpensesNamesEditText.getText().toString();
-                    expensesDisplay.setText(incomeName);
+                    Double incomeDouble = Double.valueOf(income);
+                    expenseAmountTextView.setText(Double.toString(incomeDouble));
+                    expenseNameTextView.setText(incomeName);
                 }
+
             }
         });
     }
