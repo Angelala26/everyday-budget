@@ -18,6 +18,8 @@
     <string name="monthly_income">Monthly Income</string>
     <string name="work">Work</string>
     <string name="add_income">Add monthly income</string>
+    <string name="income">Income</string>
+    <string name="income_amount">Income amount</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

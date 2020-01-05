@@ -18,6 +18,8 @@ public class Income extends MainActivity {
     EditText enterIncomeEditText;
     EditText enterIncomeNamesEditText;
     Button addIncomeButton;
+    TextView incomeAmountTextView;
+    TextView incomeNameTextView;
     //TODO: show income on line after entered and leave space to enter more incomes
 
     @Override
@@ -30,10 +32,8 @@ public class Income extends MainActivity {
         enterIncomeEditText = findViewById(R.id.enter_income_edit_text);
         enterIncomeNamesEditText = findViewById(R.id.enter_income_names_edit_text);
         addIncomeButton = findViewById(R.id.add_income_button);
-
-
-        //create new TextView for later
-        final TextView incomeDisplay = new TextView(this);
+        incomeAmountTextView = findViewById(R.id.income_amount_text_view);
+        incomeNameTextView = findViewById(R.id.income_name_text_view);
 
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -85,24 +85,18 @@ public class Income extends MainActivity {
                 addIncomeButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         //TODO: Transfer this info to line in scroll view showing incomes
-                        //create TextView after clicking
-                        incomeDisplay.setLayoutParams(new RelativeLayout.LayoutParams
-                                (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        //convert to string or double
-                        if (TextUtils.isEmpty(enterIncomeEditText.getText())) {
-                            Toast.makeText(Income.this, "Income Empty", Toast.LENGTH_SHORT).show();
+                        //get input and add to TextView
+                        if (TextUtils.isEmpty(enterIncomeEditText.getText()) ||
+                                TextUtils.isEmpty(enterIncomeNamesEditText.getText())) {
+                            Toast.makeText(Income.this, "Income Name or Amount Empty", Toast.LENGTH_SHORT).show();
                         } else {
-                            String income = enterIncomeEditText.getText().toString();
-                            Double incomeDouble = Double.valueOf(income);
-                            incomeDisplay.setText(Double.toString(incomeDouble));
+                            String income = enterIncomeEditText.getText().toString() + "\n";
+                            String incomeName = enterIncomeNamesEditText.getText().toString() + "\n";
+                            incomeAmountTextView.append(income);
+                            incomeNameTextView.append(incomeName);
                         }
-                        if (TextUtils.isEmpty(enterIncomeNamesEditText.getText())) {
-                            Toast.makeText(Income.this, "Name Empty", Toast.LENGTH_SHORT).show();
-                        } else {
-                            String incomeName = enterIncomeNamesEditText.getText().toString();
-                            incomeDisplay.setText(incomeName);
-                        }
-                    }
+                        enterIncomeNamesEditText.setText("");
+                        enterIncomeEditText.setText("");                        }
                 });
 
 
