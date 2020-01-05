@@ -20,7 +20,7 @@ public class Expenses extends MainActivity {
     Button addExpenseButton;
     TextView expenseAmountTextView;
     TextView expenseNameTextView;
-    Double totalIncome;
+    Double totalExpenses;
 
 
     @Override
@@ -28,7 +28,7 @@ public class Expenses extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
 
-        totalIncome = 0.00;
+        totalExpenses = 0.00;
 
 
         //connect editTexts
@@ -93,13 +93,13 @@ public class Expenses extends MainActivity {
                 if (TextUtils.isEmpty(enterExpensesEditText.getText()) || TextUtils.isEmpty(enterExpensesNamesEditText.getText())) {
                     Toast.makeText(Expenses.this, "Expense Amount or Name Empty", Toast.LENGTH_SHORT).show();
                 } else {
-                    String income = enterExpensesEditText.getText().toString() + "\n";
-                    String incomeName = enterExpensesNamesEditText.getText().toString() + "\n";
-                    expenseAmountTextView.append(income);
-                    expenseNameTextView.append(incomeName);
-                    //parse income to double in order to add it and later feed to EverydayBudget
-                    totalIncome += Double.parseDouble(income);
-                    Toast.makeText(Expenses.this, totalIncome.toString(), Toast.LENGTH_LONG).show();
+                    String expenses = enterExpensesEditText.getText().toString() + "\n";
+                    String expenseName = enterExpensesNamesEditText.getText().toString() + "\n";
+                    expenseAmountTextView.append(expenses);
+                    expenseNameTextView.append(expenseName);
+                    //parse expenses to double in order to add it and later feed to EverydayBudget
+                    totalExpenses += Double.parseDouble(expenses);
+                    Toast.makeText(Expenses.this, totalExpenses.toString(), Toast.LENGTH_LONG).show();
                 }
                 enterExpensesNamesEditText.setText("");
                 enterExpensesEditText.setText("");
