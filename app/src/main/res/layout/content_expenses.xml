@@ -23,7 +23,7 @@
         android:id="@+id/edit_texts_linear_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/expense_name_text_view"
+        android:layout_below="@+id/expense_amount_list_view"
         android:layout_margin="30dp"
         android:orientation="horizontal"
         android:weightSum="2">
@@ -35,8 +35,7 @@
             android:layout_weight="1"
             android:ellipsize="start"
             android:gravity="center_horizontal"
-            android:hint="@string/expense"
-            android:padding="10dp" />
+            android:hint="@string/expense" />
 
         <EditText
             android:id="@+id/enter_expenses_edit_text"
@@ -46,8 +45,7 @@
             android:ellipsize="start"
             android:gravity="center_horizontal"
             android:hint="@string/amount_hint"
-            android:inputType="number"
-            android:padding="10dp" />
+            android:inputType="number" />
     </LinearLayout>
 
     <Button
@@ -58,22 +56,28 @@
         android:layout_centerInParent="true"
         android:text="@string/add_expenses" />
 
-    <TextView
-        android:id="@+id/expense_name_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recurring_expenses_text_view"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="75dp"
-        android:padding="30dp" />
 
-    <TextView
-        android:id="@+id/expense_amount_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recurring_expenses_text_view"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="75dp"
-        android:padding="30dp" />
+        <ListView
+            android:id="@+id/expense_name_list_view"
+            android:layout_below="@id/recurring_expenses_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginStart="30dp"
+            android:layout_alignEnd="@id/fakeView"
+            android:layout_alignParentStart="true"/>
+
+    <View android:id="@+id/fakeView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"/>
+
+        <ListView
+            android:id="@+id/expense_amount_list_view"
+            android:layout_below="@id/recurring_expenses_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginEnd="30dp"
+            android:layout_alignStart="@id/fakeView"
+            android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

@@ -7,20 +7,25 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Expenses extends MainActivity {
 
     EditText enterExpensesEditText;
     EditText enterExpensesNamesEditText;
     Button addExpenseButton;
-    TextView expenseAmountTextView;
-    TextView expenseNameTextView;
-    Double totalExpenses;
+    ListView expenseAmountListView;
+    ListView expenseNameListView;
 
 
     @Override
@@ -28,16 +33,41 @@ public class Expenses extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
 
-        totalExpenses = 0.00;
-
-
         //connect editTexts
         enterExpensesEditText = findViewById(R.id.enter_expenses_edit_text);
         enterExpensesNamesEditText = findViewById(R.id.enter_expense_names_edit_text);
         addExpenseButton = findViewById(R.id.add_expense_button);
-        expenseAmountTextView = findViewById(R.id.expense_amount_text_view);
-        expenseNameTextView = findViewById(R.id.expense_name_text_view);
+        expenseAmountListView = findViewById(R.id.expense_amount_list_view);
+        expenseNameListView = findViewById(R.id.expense_name_list_view);
 
+        //initialize new String Array for listview
+        String[] expenses = new String[]{
+                ""
+        };
+        // Create a List from String Array elements
+        final List<String> expenses_list = new ArrayList<>(Arrays.asList(expenses));
+
+        // Create an ArrayAdapter from List
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1, expenses_list);
+
+        //Bind ListView with ArrayAdapter items
+        expenseAmountListView.setAdapter(arrayAdapter);
+
+
+        //initialize new String Array for listview
+        String[] expenseNames = new String[]{
+                ""
+        };
+        // Create a List from String Array elements
+        final List<String> expenses_names_list = new ArrayList<>(Arrays.asList(expenseNames));
+
+        // Create an ArrayAdapter from List
+        final ArrayAdapter<String> arrayAdapterNames = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1, expenses_names_list);
+
+        //Bind ListView with ArrayAdapter items
+        expenseNameListView.setAdapter(arrayAdapterNames);
 
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -86,20 +116,20 @@ public class Expenses extends MainActivity {
                 });
 
 
-
         addExpenseButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //TODO: Transfer this info to line in scroll view showing incomes
                 if (TextUtils.isEmpty(enterExpensesEditText.getText()) || TextUtils.isEmpty(enterExpensesNamesEditText.getText())) {
                     Toast.makeText(Expenses.this, "Expense Amount or Name Empty", Toast.LENGTH_SHORT).show();
                 } else {
                     String expenses = enterExpensesEditText.getText().toString() + "\n";
                     String expenseName = enterExpensesNamesEditText.getText().toString() + "\n";
-                    expenseAmountTextView.append(expenses);
-                    expenseNameTextView.append(expenseName);
-                    //parse expenses to double in order to add it and later feed to EverydayBudget
-                    totalExpenses += Double.parseDouble(expenses);
-                    Toast.makeText(Expenses.this, totalExpenses.toString(), Toast.LENGTH_LONG).show();
+                    //add new expenses to list and notify data set changed
+                    expenses_list.add(expenses);
+                    expenses_names_list.add(expenseName);
+
+                    arrayAdapter.notifyDataSetChanged();
+                    arrayAdapterNames.notifyDataSetChanged();
+
                 }
                 enterExpensesNamesEditText.setText("");
                 enterExpensesEditText.setText("");
