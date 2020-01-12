@@ -3,10 +3,12 @@ package com.karltech.android.everydaybudget;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,14 +26,19 @@ public class Expenses extends MainActivity {
     EditText enterExpensesEditText;
     EditText enterExpensesNamesEditText;
     Button addExpenseButton;
-    ListView expenseAmountListView;
     ListView expenseNameListView;
+    ListView expenseAmountListView;
+
+    //for listview synced scrolling
+    boolean isLeftListEnabled = true;
+    boolean isRightListEnabled = true;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
+
 
         //connect editTexts
         enterExpensesEditText = findViewById(R.id.enter_expenses_edit_text);
@@ -134,8 +141,57 @@ public class Expenses extends MainActivity {
                 enterExpensesNamesEditText.setText("");
                 enterExpensesEditText.setText("");
 
+
+                //all methods to sync scrolling of listviews
+
+                // IF YOU DO NOT OVERRIDE THIS
+                // ONLY THE ONE THAT IS TOUCHED WILL SCROLL OVER
+                expenseNameListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
+                expenseAmountListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
+
+                expenseNameListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+                        // onScroll will be called and there will be an infinite loop.
+                        // That's why i set a boolean value
+                        if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                            isRightListEnabled = false;
+                        } else if (scrollState == SCROLL_STATE_IDLE) {
+                            isRightListEnabled = true;
+                        }
+                    }
+
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                                         int totalItemCount) {
+                        View c = view.getChildAt(0);
+                        if (c != null && isLeftListEnabled) {
+                            expenseAmountListView.setSelectionFromTop(firstVisibleItem, c.getTop());
+                        }
+                    }
+                });
+
+                expenseAmountListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+                        if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                            isLeftListEnabled = false;
+                        } else if (scrollState == SCROLL_STATE_IDLE) {
+                            isLeftListEnabled = true;
+                        }
+                    }
+
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                                         int totalItemCount) {
+                        View c = view.getChildAt(0);
+                        if (c != null && isRightListEnabled) {
+                            expenseNameListView.setSelectionFromTop(firstVisibleItem, c.getTop());
+                        }
+                    }
+                });
             }
         });
     }
-
 }
