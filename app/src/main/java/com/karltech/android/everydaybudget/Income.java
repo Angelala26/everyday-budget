@@ -6,21 +6,28 @@ import android.support.design.widget.NavigationView;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Income extends MainActivity {
 
     EditText enterIncomeEditText;
     EditText enterIncomeNamesEditText;
     Button addIncomeButton;
-    TextView incomeAmountTextView;
-    TextView incomeNameTextView;
-    //TODO: show income on line after entered and leave space to enter more incomes
+    ListView incomeAmountListView;
+    ListView incomeNameListView;
+
+    //for listview synced scrolling
+    boolean isLeftListEnabled = true;
+    boolean isRightListEnabled = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +39,37 @@ public class Income extends MainActivity {
         enterIncomeEditText = findViewById(R.id.enter_income_edit_text);
         enterIncomeNamesEditText = findViewById(R.id.enter_income_names_edit_text);
         addIncomeButton = findViewById(R.id.add_income_button);
-        incomeAmountTextView = findViewById(R.id.income_amount_text_view);
-        incomeNameTextView = findViewById(R.id.income_name_text_view);
+        incomeAmountListView = findViewById(R.id.income_amount_list_view);
+        incomeNameListView = findViewById(R.id.income_name_list_view);
+
+        //initialize new String Array for listview
+        String[] income = new String[]{
+                ""
+        };
+        // Create a List from String Array elements
+        final List<String> income_list = new ArrayList<>(Arrays.asList(income));
+
+        // Create an ArrayAdapter from List
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1, income_list);
+
+        //Bind ListView with ArrayAdapter items
+        incomeAmountListView.setAdapter(arrayAdapter);
+
+
+        //initialize new String Array for listview
+        String[] incomeNames = new String[]{
+                ""
+        };
+        // Create a List from String Array elements
+        final List<String> income_names_list = new ArrayList<>(Arrays.asList(incomeNames));
+
+        // Create an ArrayAdapter from List
+        final ArrayAdapter<String> arrayAdapterNames = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1, income_names_list);
+
+        //Bind ListView with ArrayAdapter items
+        incomeNameListView.setAdapter(arrayAdapterNames);
 
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -82,23 +118,75 @@ public class Income extends MainActivity {
                 });
 
 
-                addIncomeButton.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        //TODO: Transfer this info to line in scroll view showing incomes
-                        //get input and add to TextView
-                        if (TextUtils.isEmpty(enterIncomeEditText.getText()) ||
-                                TextUtils.isEmpty(enterIncomeNamesEditText.getText())) {
-                            Toast.makeText(Income.this, "Income Name or Amount Empty", Toast.LENGTH_SHORT).show();
-                        } else {
-                            String income = enterIncomeEditText.getText().toString() + "\n";
-                            String incomeName = enterIncomeNamesEditText.getText().toString() + "\n";
-                            incomeAmountTextView.append(income);
-                            incomeNameTextView.append(incomeName);
+        addIncomeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(enterIncomeEditText.getText()) ||
+                        TextUtils.isEmpty(enterIncomeNamesEditText.getText())) {
+                    Toast.makeText(Income.this, "Income Name or Amount Empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    String income = enterIncomeEditText.getText().toString() + "\n";
+                    String incomeName = enterIncomeNamesEditText.getText().toString() + "\n";
+                    //add new expenses to list and notify data set changed
+                    income_list.add(income);
+                    income_names_list.add(incomeName);
+
+                    arrayAdapter.notifyDataSetChanged();
+                    arrayAdapterNames.notifyDataSetChanged();
+                }
+                enterIncomeNamesEditText.setText("");
+                enterIncomeEditText.setText("");
+
+
+                //all methods to sync scrolling of listviews
+
+                // IF YOU DO NOT OVERRIDE THIS
+                // ONLY THE ONE THAT IS TOUCHED WILL SCROLL OVER
+                incomeNameListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
+                incomeAmountListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
+
+                incomeNameListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+                        // onScroll will be called and there will be an infinite loop.
+                        // That's why i set a boolean value
+                        if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                            isRightListEnabled = false;
+                        } else if (scrollState == SCROLL_STATE_IDLE) {
+                            isRightListEnabled = true;
                         }
-                        enterIncomeNamesEditText.setText("");
-                        enterIncomeEditText.setText("");                        }
+                    }
+
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                                         int totalItemCount) {
+                        View c = view.getChildAt(0);
+                        if (c != null && isLeftListEnabled) {
+                            incomeAmountListView.setSelectionFromTop(firstVisibleItem, c.getTop());
+                        }
+                    }
                 });
 
+                incomeAmountListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+                        if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                            isLeftListEnabled = false;
+                        } else if (scrollState == SCROLL_STATE_IDLE) {
+                            isLeftListEnabled = true;
+                        }
+                    }
 
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                                         int totalItemCount) {
+                        View c = view.getChildAt(0);
+                        if (c != null && isRightListEnabled) {
+                            incomeNameListView.setSelectionFromTop(firstVisibleItem, c.getTop());
+                        }
+                    }
+                });
+            }
+        });
     }
 }
