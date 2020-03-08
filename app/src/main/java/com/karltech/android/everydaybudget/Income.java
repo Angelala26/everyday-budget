@@ -29,11 +29,23 @@ public class Income extends MainActivity {
     boolean isLeftListEnabled = true;
     boolean isRightListEnabled = true;
 
+    // new String Array for listview
+    private String[] incomeArray;
+    //create getters
+    public String[] getIncomeArray() {
+        return  incomeArray;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_income);
 
+        //initialize new String array
+        incomeArray = new String[]{
+                ""
+        };
 
         //connect EditTexts
         enterIncomeEditText = findViewById(R.id.enter_income_edit_text);
@@ -42,12 +54,8 @@ public class Income extends MainActivity {
         incomeAmountListView = findViewById(R.id.income_amount_list_view);
         incomeNameListView = findViewById(R.id.income_name_list_view);
 
-        //initialize new String Array for listview
-        String[] income = new String[]{
-                ""
-        };
         // Create a List from String Array elements
-        final List<String> income_list = new ArrayList<>(Arrays.asList(income));
+        final List<String> income_list = new ArrayList<>(Arrays.asList(incomeArray));
 
         // Create an ArrayAdapter from List
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>
@@ -135,6 +143,7 @@ public class Income extends MainActivity {
                 }
                 enterIncomeNamesEditText.setText("");
                 enterIncomeEditText.setText("");
+
 
 
                 //all methods to sync scrolling of listviews

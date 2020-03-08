@@ -1,12 +1,16 @@
 package com.karltech.android.everydaybudget;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.util.stream.IntStream;
 
 public class EverydayBudget extends MainActivity {
 
@@ -15,6 +19,12 @@ public class EverydayBudget extends MainActivity {
     TextView recurringExpensesTextView;
     TextView bigExpensesTextView;
 
+    Double incomeSum;
+    Double expensesSum;
+    Double amountPerDay;
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,14 +82,58 @@ public class EverydayBudget extends MainActivity {
                     }
                 });
 
+
+        //get the income array from Income.java
+        Income newIncomeObject = new Income();
+        String[] incomeArray = newIncomeObject.getIncomeArray();
+
+        //Get the expenses array from Expenses.java
+        Expenses newExpensesObject = new Expenses();
+        String[] expensesArray = newExpensesObject.getExpensesArray();
+
+        //convert String array to int
+        Double [] incomeArrayDouble = new Double [incomeArray.length];
+        for(int i=0; i<incomeArray.length; i++) {
+            incomeArrayDouble[i] = Double.parseDouble(incomeArray[i]);
         }
 
+        Double [] expensesArrayDouble = new Double [expensesArray.length];
+        for(int i=0; i<expensesArray.length; i++) {
+            expensesArrayDouble[i] = Double.parseDouble(expensesArray[i]);
+        }
+
+        //get sum of income
+        incomeSum = 0.00;
+        int iI = 0;
+        while (iI < 10) {
+            incomeSum += incomeArrayDouble[iI];
+            iI++;
+        }
+
+        expensesSum = 0.00;
+        int iE = 0;
+        while (iE<10) {
+            expensesSum += expensesArrayDouble[iE];
+            iE++;
+        }
+
+        amountPerDay = calculateAmountPerDay(incomeSum, expensesSum);
+        String amountPerDayString = amountPerDay.toString();
+        amountPerDayTextView.setText(amountPerDayString);
+    }
+
+
+
+
     //Calculate the amount per day
-    public double calculateAmountPerDay(double income, double expenses, double savings) {
-        double monthlyAmount = income - expenses - savings;
+    //add savings later
+    public double calculateAmountPerDay(double income, double expenses) {
+        double monthlyAmount = income - expenses;
         double dailyAmountDouble = monthlyAmount / 30.0;
         DecimalFormat df = new DecimalFormat("#.##");
-        dailyAmountDouble = Double.valueOf(df.format(dailyAmountDouble));
+        dailyAmountDouble = Double.parseDouble(df.format(dailyAmountDouble));
+        String dailyAmountString = Double.toString(dailyAmountDouble);
+        Toast.makeText(this, dailyAmountString, Toast.LENGTH_LONG).show();
         return dailyAmountDouble;
 
     }

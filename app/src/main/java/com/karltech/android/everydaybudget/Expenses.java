@@ -29,6 +29,16 @@ public class Expenses extends MainActivity {
     boolean isLeftListEnabled = true;
     boolean isRightListEnabled = true;
 
+    //initialize new String Array for listview
+    String[] expensesArray = new String[]{
+            ""
+    };
+    //create getters
+    public String[] getExpensesArray() {
+        return  expensesArray;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +52,9 @@ public class Expenses extends MainActivity {
         expenseAmountListView = findViewById(R.id.expense_amount_list_view);
         expenseNameListView = findViewById(R.id.expense_name_list_view);
 
-        //initialize new String Array for listview
-        String[] expenses = new String[]{
-                ""
-        };
+
         // Create a List from String Array elements
-        final List<String> expenses_list = new ArrayList<>(Arrays.asList(expenses));
+        final List<String> expenses_list = new ArrayList<>(Arrays.asList(expensesArray));
 
         // Create an ArrayAdapter from List
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>
