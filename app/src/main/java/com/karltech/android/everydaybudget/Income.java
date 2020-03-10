@@ -82,6 +82,7 @@ public class Income extends MainActivity {
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -197,5 +198,14 @@ public class Income extends MainActivity {
                 });
             }
         });
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
     }
 }
