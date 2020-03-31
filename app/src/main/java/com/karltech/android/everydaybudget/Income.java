@@ -200,12 +200,10 @@ public class Income extends MainActivity {
         });
     }
 
-    public void onSaveInstanceState(Bundle outState) {
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
 
-        super.onSaveInstanceState(outState);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-
-    }
 }
