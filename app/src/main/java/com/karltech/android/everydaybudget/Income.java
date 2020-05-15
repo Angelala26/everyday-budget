@@ -1,9 +1,11 @@
 package com.karltech.android.everydaybudget;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
@@ -13,6 +15,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,17 +39,21 @@ public class Income extends MainActivity {
     boolean isLeftListEnabled = true;
     boolean isRightListEnabled = true;
 
-    // new String Array for listview
+    // new String Array for income amounts
     private String[] incomeArray;
     //create getters
     public String[] getIncomeArray() {
         return  incomeArray;
     }
 
+    // new String Array for income names
+    private String[] incomeNames;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_income);
 
         //initialize new String array
@@ -66,7 +80,7 @@ public class Income extends MainActivity {
 
 
         //initialize new String Array for listview
-        String[] incomeNames = new String[]{
+        incomeNames = new String[]{
                 ""
         };
         // Create a List from String Array elements
@@ -82,6 +96,8 @@ public class Income extends MainActivity {
         //add everything for navigation drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
+        //Create file to add this data to
+        File file = new File(getApplicationContext().getFilesDir(), "incomenamesfile.txt");
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -200,10 +216,47 @@ public class Income extends MainActivity {
         });
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
 
-        super.onSaveInstanceState(savedInstanceState);
+    //methods to write and read file for internal storage
+    private void writeToFile(String data, Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter =
+                    new OutputStreamWriter(context.openFileOutput("config.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 
+    private String readFromFile(Context context) {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput("config.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append("\n").append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
 }
